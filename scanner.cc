@@ -51,12 +51,22 @@ public:
             //ler primeira linha
             arquivo.getline(buffer, 50);
 
+            //ler cabeçalho
             arquivo >> width;
             arquivo >> height;
             arquivo >> max;
 
-            cout << width << " " << height << " " << max << endl;
-
+            //total de pixels
+            int total = width*height;
+            //criar grafo
+            grafo = new Graph(total+2); // todos os pixels + uma Sorce (vértice 0) e um Sink (vértice lagura*altura+1)
+            
+            //preencher os vértices com os valores de cada pixel
+            for (int pixel=1; pixel<=total; pixel++){
+                int value;
+                arquivo >> value;
+                grafo->setVertex(pixel, value);
+            }
 
         }
 
@@ -81,7 +91,6 @@ public:
 
 //para testes
 int main(){
-    Scanner::buildGraph("basic.pgm");
-    Scanner::buildGraph("basic2.pgm");
-    Scanner::buildGraph("dragon.ascii.pgm");
+    Scanner::buildGraph("small.pgm")->print();
+   // Scanner::buildGraph("basic.pgm")->print();
 }
