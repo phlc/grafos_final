@@ -238,14 +238,3 @@ public:
         return deepFirstSearch(matrix, n_vertices, v_init, -1);
     }
 };
-
-int main(){
-    Graph grafo = Graph(10);
-    grafo.print();
-    cout << endl << endl;
-    grafo.setVertex(5, 55);
-    grafo.setVertex(9, 99);
-    grafo.setEdge(5, 9, 59);
-    grafo.setEdge(9, 5, 95);
-    grafo.print();
-}
