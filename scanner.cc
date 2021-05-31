@@ -11,6 +11,11 @@ Trabalho Final
 
 /*
 Scanner - Class para leitura do arquivo .pgm e contrução do grafo
+Cada pixel do arquivo é representado por um vértice, lido da esqueda para direita, de cima para baixo
+Peso do vértice é o valor do pixel
+Haverá uma arestas entre dois pixels se forem vizinhos diretos (diagonal não é vizinho)
+Peso da aresta é dado pela fórmula: p = (valor_máximo_escala)+1 - |peso_v1 - peso_v2|
+Dessa forma, o fluxo será maior para tonalidade proximas e menor para tonalidades diferentes.
 */
 
 
@@ -31,8 +36,19 @@ private:
     */
     Scanner(){}
 
+    /*
+    calcFlow - Calcula o fluxo de uma aresta
+    @param int max, intp1, int p2
+    @return int flow
+    */
+    int calcFlow (int max, int p1, int p2){
+        int abs = p1 - p2;
+        if(abs < 0)
+            abs *= -1;
+        return ((max+1) - abs);
+    }
+
 public:    
-    //Methods
     /*
     buildGraph - Constroi um grafo a partir de um arquivo .pgm
     @param String nome do arquivo
@@ -68,6 +84,14 @@ public:
                 grafo->setVertex(pixel, value);
             }
 
+            //preencher as arestas 
+            for(int i=1; i<=total; i++){
+                //acima
+                if ((i-width)>0){
+                    grafo->setEdge()
+                }
+
+            }
         }
 
 

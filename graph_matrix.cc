@@ -114,6 +114,23 @@ public:
         return n_vertices;
     }
 
+    /*
+    getVertex - informa o valor de um vértice
+    @param int vértice
+    @return int valor
+    */
+    int getVertex(int v){
+        return matrix[v][v];
+    }
+
+    /*
+    getEdge - informa o valor de uma aresta
+    @param int v1, int v2
+    @return int valor
+    */
+    int getEdge(int v1, int v2){
+        return matrix[v1][v2];
+    }
 
     /*
     setVertex - estabelece um peso para um vértice no grafo
