@@ -10,7 +10,7 @@ Trabalho Final
 
 
 /*
-Scanner - Class para leitura do arquivo .pgm e contrução do grafo
+Converter - Class para leitura do arquivo .pgm e contrução do grafo e vice-versa
 Cada pixel do arquivo é representado por um vértice, lido da esqueda para direita, de cima para baixo
 Peso do vértice é o valor do pixel
 Haverá uma arestas entre dois pixels se forem vizinhos diretos (diagonal não é vizinho)
@@ -28,20 +28,20 @@ Dessa forma, o fluxo será maior para tonalidade proximas e menor para tonalidad
 using namespace std;
 
 
-class Scanner{
+class Converter{
 
 private:
     /*
     Constructor not allowed - Static Class
     */
-    Scanner(){}
+    Converter(){}
 
     /*
     calcFlow - Calcula o fluxo de uma aresta
-    @param int max, intp1, int p2
+    @param int max, int p1, int p2
     @return int flow
     */
-    int calcFlow (int max, int p1, int p2){
+    static int calcFlow (int max, int p1, int p2){
         int abs = p1 - p2;
         if(abs < 0)
             abs *= -1;
@@ -86,9 +86,21 @@ public:
 
             //preencher as arestas 
             for(int i=1; i<=total; i++){
-                //acima
+                //com vizinho de acima
                 if ((i-width)>0){
-                    grafo->setEdge()
+                    grafo->setEdge(i, (i-width), calcFlow(max, grafo->getVertex(i), grafo->getVertex(i-width)));
+                }
+                //com vizinho de baixo
+                if(i+width<=total){
+                    grafo->setEdge(i, (i+width), calcFlow(max, grafo->getVertex(i), grafo->getVertex(i+width)));
+                }
+                //com vizinho da esquerta
+                if(i%width!=1){
+                    grafo->setEdge(i, i-1, calcFlow(max, grafo->getVertex(i), grafo->getVertex(i-1)));
+                }
+                //com vizinho da direita
+                if(i%width!=0){
+                    grafo->setEdge(i, i+1, calcFlow(max, grafo->getVertex(i), grafo->getVertex(i+1)));
                 }
 
             }
@@ -115,6 +127,6 @@ public:
 
 //para testes
 int main(){
-    Scanner::buildGraph("small.pgm")->print();
-   // Scanner::buildGraph("basic.pgm")->print();
+    Converter::buildGraph("small.pgm")->print();
+   // Converter::buildGraph("basic.pgm")->print();
 }
