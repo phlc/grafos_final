@@ -27,7 +27,6 @@ Dessa forma, o fluxo será maior para tonalidade proximas e menor para tonalidad
 //Namespade
 using namespace std;
 
-
 class Converter{
 
 private:
@@ -51,14 +50,14 @@ private:
 public:    
     /*
     buildGraph - Constroi um grafo a partir de um arquivo .pgm
-    @param String nome do arquivo
+    @param String nome do arquivo, int pixel referência p/ conectar source, int pixel referência p/ conectar sink
     @return Graph*
     */
-    static Graph* buildGraph(string nome){
+    static Graph* buildGraph(string nome, int s, int t){
         //declarações
         fstream arquivo;
         Graph* grafo = NULL;    
-        int width, height, max; //largura, altura e valor máximo de cinza do arquivo    
+        int width, height, max, total; //largura, altura e valor máximo de cinza do arquivo, total de pixels    
         char buffer[50];
 
         //abrir arquivo
@@ -73,7 +72,7 @@ public:
             arquivo >> max;
 
             //total de pixels
-            int total = width*height;
+            total = width*height;
             //criar grafo
             grafo = new Graph(total+2); // todos os pixels + uma Sorce (vértice 0) e um Sink (vértice lagura*altura+1)
             
@@ -106,7 +105,17 @@ public:
             }
         }
 
-
+        //conectar source e sink a todos vértices com tonalidade igual a s e t respectivamente 
+        int source = grafo->getVertex(s);
+        int sink = grafo->getVertex(t);
+        for(int i=1; i<total; i++){
+            if(grafo->getVertex(i)==source){
+                grafo->setEdge(0, i, max+1);
+            }
+            else if(grafo->getVertex(i)==sink){
+                grafo->setEdge(i, total+1, max+1);
+            }
+        }
         //fechar arquivo 
         arquivo.close();
 
@@ -127,6 +136,6 @@ public:
 
 //para testes
 int main(){
-    Converter::buildGraph("small.pgm")->print();
+    Converter::buildGraph("small.pgm", 13, 27)->print();
    // Converter::buildGraph("basic.pgm")->print();
 }
