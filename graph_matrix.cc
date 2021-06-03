@@ -268,6 +268,7 @@ public:
     
 };
 
+//para teste
 int main(){
     Graph test = Graph(6);
     test.setEdge(0, 1, 1);
