@@ -114,7 +114,7 @@ public:
         //conectar source e sink a todos vértices com tonalidade igual a s e t respectivamente 
         int source = grafo->getVertex(s);
         int sink = grafo->getVertex(t);
-        for(int i=1; i<total; i++){
+        for(int i=1; i<=total; i++){
             if(grafo->getVertex(i)==source){
                 grafo->setEdge(0, i, max+1);
             }

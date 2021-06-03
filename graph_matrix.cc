@@ -234,7 +234,7 @@ public:
         Queue fila = Queue(n_vertices);
 
         //teste validade parametros
-        if (0<=v1 && v1<n_vertices && 0<=2 && v2<n_vertices){
+        if (0<=v1 && v1<n_vertices && 0<=v2 && v2<n_vertices){
             //inicializar parents e visited para controle de visitados
             parents = new int[n_vertices];
             int visited[n_vertices];
@@ -265,6 +265,12 @@ public:
         }
         return parents;
     }
+
+    /*
+    minCut - Calcula o corte mínimo do grafo
+    @param int s - source, int t - sink
+    @return
+
     
 };
 /*
