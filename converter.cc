@@ -36,7 +36,7 @@ private:
     Converter(){}
 
     /*
-    calcFlow - Calcula o fluxo de uma aresta
+    calcFlow - Calcula a capcidade de fluxo de uma aresta
     @param int max, int p1, int p2
     @return int flow
     */

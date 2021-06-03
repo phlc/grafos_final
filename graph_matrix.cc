@@ -107,6 +107,22 @@ public:
     }
 
     /*
+    copy - Cria uma cópia do grafo
+    @return Graph*
+    */
+    Graph* copy(){
+        Graph* cp = new Graph(this->n_vertices);
+
+        for(int i=0; i<n_vertices; i++){
+            for(int j=0; j<n_vertices; j++){
+                cp->matrix[i][j] = this->matrix[i][j];
+            }
+        }
+
+        return cp;
+    }
+
+    /*
     nVertices - informa o número de vértices do grafo
     @return número de vértices
     */
@@ -267,13 +283,80 @@ public:
     }
 
     /*
-    minCut - Calcula o corte mínimo do grafo
+    minCapacity - Dado um caminho, encontra a menor capacidade
+    @param int* parents - arranjo de ancestralidade, int s - source, int t - sink
+    @return int - menor capacidade
+    */
+    int minCapacity(int* parents, int s, int t){
+        int v1 = parents[t];
+        int v2 = t;
+        int capacity = matrix[v1][v2];
+
+        while (v1 != s){
+            v2 = v1;
+            v1 = parents[v2];
+            if (capacity > matrix[v1][v2]){
+                capacity = matrix[v1][v2];
+            }
+        }
+
+        return capacity;
+    }
+
+    /*
+    subtractFlow - Subtrai um fluxo de um caminho
+    @param int* parents = arranjo de ancestralidade, int s- source, int t - sink, int flow
+    */
+    void subtractFlow(int* parents, int s, int t, int flow){
+        int v1 = parents[t];
+        int v2 = t;
+
+        //subtrair fluxo
+        matrix[v1][v2] = matrix[v1][v2] - flow;
+        matrix[v2][v1] = matrix[v2][v1] + flow;
+
+        //repetir pelo caminho
+        while (v1 != s){
+            v2 = v1;
+            v1 = parents[v2];
+            matrix[v1][v2] = matrix[v1][v2] - flow;
+            matrix[v2][v1] = matrix[v2][v1] + flow;
+        }
+
+    }
+
+
+    /*
+    maxFlow - Calcula o corte mínimo do grafo
     @param int s - source, int t - sink
-    @return
+    @return Graph* com o fluxo maximo nas arestas
+    */
+    Graph* maxFlow(int s, int t){
+        //criar cópia
+        Graph* max = this->copy();
+
+        //busca por largura
+        int* parents = max->breadthSearch(s, t);
+
+        //repetir enquanto houver caminho s->t
+        while (parents[t]!=-1){
+            //achar menor capacidade do caminho
+            int flow = max->minCapacity(parents, s, t);
+
+            //subtrair fluxo
+            max->subtractFlow(parents, s, t, flow);
+
+            //nova busca
+            parents =  max->breadthSearch(s, t);
+
+        }
+
+        return max;
+    }
 
     
 };
-/*
+
 // para teste
 int main(){
     Graph test = Graph(6);
@@ -295,4 +378,3 @@ int main(){
     }
     cout << endl;
 }
-*/
