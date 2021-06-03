@@ -206,12 +206,60 @@ public:
         dequeue - desenfileira um elemento da fila
         @return int n elemento | -1 fila vazia
         */
-       int dequeue(){
-           if(first!=last){
-               return arr[first++];
-           }
-           return -1;
-       }
+        int dequeue(){
+            if(first!=last){
+                return arr[first++];
+            }
+            return -1;
+        }
+
+        /*
+        isEmpty - verifica se a fila está vazia
+        @bool true vazia | false !vazia
+        */
+        bool isEmpty(){
+            return first==last;
+        }
     };
+
+    /*
+    breadthSearch - Realiza uma busca em largura
+    @param int v1 inicial, int v2 objetivo
+    @return int* arranjo de ascendentes | arranjo[v2] = -1 fail | NULL erro
+    */
+    int* breadthSearch(int v1, int v2){
+        //declarações
+        int* parents = NULL;
+        Queue fila = Queue(n_vertices);
+
+        //teste validade parametros
+        if (0<=v1 && v1<n_vertices && 0<=2 && v2<n_vertices){
+            //inicializar parents e visited para controle de visitados
+            parentes = new int[n_vertices];
+            int visited[n_vertices];
+            for (int i=0; i<n_vertices; i++){
+                visited[i] = parents[i] = -1;
+            }
+
+            //enfileirar vértice inicial 
+            fila.enqueue(v1);
+
+            //buscar
+            while(!fila.isEmpty() && visited[v2]!=1){
+                int v = fila.dequeue();
+                visited[v] = 1; //marcar como visitado
+
+                //inserir na listas vértices adjacentes não visitados
+                for(int i=v+1; i%n_vertices!=v; i++){
+                    if(matrix[v][i]!=0 && visited[i]!=1){
+                        parents[i]=v;
+                        visited[i] = 1;
+                        fila.enqueue(i);
+                    }
+                }
+            }
+        }
+        return parents;
+    }
     
 };
