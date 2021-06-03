@@ -271,10 +271,10 @@ public:
 
                 //inserir na listas vértices adjacentes não visitados
                 for(int i=v+1; i%n_vertices!=v; i++){
-                    if(matrix[v][i]!=0 && visited[i]!=1){
-                        parents[i]=v;
-                        visited[i] = 1;
-                        fila.enqueue(i);
+                    if(matrix[v][i%n_vertices]!=0 && visited[i%n_vertices]!=1){
+                        parents[i%n_vertices]=v;
+                        visited[i%n_vertices] = 1;
+                        fila.enqueue(i%n_vertices);
                     }
                 }
             }
@@ -375,7 +375,15 @@ int main(){
 
     Graph* corte = test.maxFlow(0, 5);
 
+    cout << endl;
+
     corte->print();
 
+    int* parents = corte->breadthSearch(0, 5);
+
+    cout << endl;
+    for(int i=0; i<6; i++){
+        cout << parents[i] << " ";
+    }
     cout << endl;
 }
