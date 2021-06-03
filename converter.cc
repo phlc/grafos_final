@@ -158,7 +158,7 @@ public:
     }
 };
 
-
+/*
 //para testes
 int main(){
     int data[3];
@@ -167,3 +167,4 @@ int main(){
     Converter::drawLimits (test, data, "saida.pgm");
 
 }
+*/

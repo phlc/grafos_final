@@ -357,6 +357,7 @@ public:
     
 };
 
+/*
 // para teste
 int main(){
     Graph test = Graph(6);
@@ -387,3 +388,4 @@ int main(){
     }
     cout << endl;
 }
+*/
