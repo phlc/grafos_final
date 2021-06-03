@@ -174,7 +174,7 @@ private:
         int size; //tamanho da fila
         int* arr; //fila
 
-public:
+    public:
         //constructor
         Queue(int s){
             first = 0;
@@ -222,6 +222,7 @@ public:
         }
     };
 
+public:
     /*
     breadthSearch - Realiza uma busca em largura
     @param int v1 inicial, int v2 objetivo
@@ -235,7 +236,7 @@ public:
         //teste validade parametros
         if (0<=v1 && v1<n_vertices && 0<=2 && v2<n_vertices){
             //inicializar parents e visited para controle de visitados
-            parentes = new int[n_vertices];
+            parents = new int[n_vertices];
             int visited[n_vertices];
             for (int i=0; i<n_vertices; i++){
                 visited[i] = parents[i] = -1;
@@ -243,6 +244,9 @@ public:
 
             //enfileirar vértice inicial 
             fila.enqueue(v1);
+
+            //vértice inicial pai dele mesmo
+            parents[v1]=v1;
 
             //buscar
             while(!fila.isEmpty() && visited[v2]!=1){
@@ -263,3 +267,24 @@ public:
     }
     
 };
+
+int main(){
+    Graph test = Graph(6);
+    test.setEdge(0, 1, 1);
+    test.setEdge(0, 2, 1);
+    test.setEdge(0, 3, 1);
+    test.setEdge(1, 2, 1);
+    test.setEdge(2, 0, 1);
+    test.setEdge(3, 4, 1);
+    test.setEdge(4, 5, 1);
+
+    // test.setEdge(1, 5, 1);
+
+    int* parents = test.breadthSearch(0, 5);
+
+    cout << endl;
+    for(int i=0; i<6; i++){
+        cout << parents[i] << " ";
+    }
+    cout << endl;
+}
