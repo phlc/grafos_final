@@ -128,14 +128,35 @@ public:
     @param Graph* representativo da figura, int width, int height, String nome do arquivo
     @return int 1 sucess || 0 fail
     */
-    static int drawLimits (Graph* grafo, int width, int height, string nome){
+    static int drawLimits (Graph* grafo, int width, int height, int max, string nome){
+        //declarações
         int control = 0;
+        fstream arquivo;
+
+        //abrir arquivo
+        arquivo.open(nome, ios::out);
+        if(arquivo.is_open()){
+            arquivo << "P2" << endl;
+            arquivo << width << " " << height << endl;
+            arquivo << max << endl;
+            control++;
+            for(int i=0; i<height; i++){
+                for(int j=0; j<width; j++){
+                    arquivo << grafo->getVertex(control) << " ";
+                    control++;
+                }
+                arquivo << endl;
+            }
+        }
         return control;
     }
 };
 
+
 //para testes
 int main(){
-    Converter::buildGraph("small.pgm", 13, 27)->print();
+    Graph* test = Converter::buildGraph("small.pgm", 13, 27);
    // Converter::buildGraph("basic.pgm")->print();
+    Converter::drawLimits (test, 5, 6, 15, "saida.pgm");
+
 }

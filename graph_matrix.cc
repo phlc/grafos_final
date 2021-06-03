@@ -267,8 +267,8 @@ public:
     }
     
 };
-
-//para teste
+/*
+// para teste
 int main(){
     Graph test = Graph(6);
     test.setEdge(0, 1, 1);
@@ -289,3 +289,4 @@ int main(){
     }
     cout << endl;
 }
+*/
