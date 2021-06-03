@@ -373,6 +373,9 @@ int main(){
     
     test.print();
 
-    
+    Graph* corte = test.maxFlow(0, 5);
+
+    corte->print();
+
     cout << endl;
 }
