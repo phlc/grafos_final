@@ -360,21 +360,19 @@ public:
 // para teste
 int main(){
     Graph test = Graph(6);
-    test.setEdge(0, 1, 1);
-    test.setEdge(0, 2, 1);
-    test.setEdge(0, 3, 1);
-    test.setEdge(1, 2, 1);
-    test.setEdge(2, 0, 1);
-    test.setEdge(3, 4, 1);
-    test.setEdge(4, 5, 1);
+    test.setEdge(0, 1, 16);
+    test.setEdge(0, 3, 13);
+    test.setEdge(1, 2, 12);
+    test.setEdge(1, 3, 10);
+    test.setEdge(2, 3, 9);
+    test.setEdge(2, 5, 20);
+    test.setEdge(3, 1, 4);
+    test.setEdge(3, 4, 14);
+    test.setEdge(4, 2, 7);
+    test.setEdge(4, 5, 4);
+    
+    test.print();
 
-    // test.setEdge(1, 5, 1);
-
-    int* parents = test.breadthSearch(0, 5);
-
-    cout << endl;
-    for(int i=0; i<6; i++){
-        cout << parents[i] << " ";
-    }
+    
     cout << endl;
 }
