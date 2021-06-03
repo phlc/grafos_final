@@ -208,8 +208,7 @@ public:
         */
        int dequeue(){
            if(first!=last){
-               last--;
-               return arr[last];
+               return arr[first++];
            }
            return -1;
        }
