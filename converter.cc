@@ -51,9 +51,10 @@ public:
     /*
     buildGraph - Constroi um grafo a partir de um arquivo .pgm
     @param String nome do arquivo, int pixel referência p/ conectar source, int pixel referência p/ conectar sink
+            int[3] para armazenar width, height e max
     @return Graph*
     */
-    static Graph* buildGraph(string nome, int s, int t){
+    static Graph* buildGraph(string nome, int s, int t, int data[3]){
         //declarações
         fstream arquivo;
         Graph* grafo = NULL;    
@@ -70,6 +71,11 @@ public:
             arquivo >> width;
             arquivo >> height;
             arquivo >> max;
+
+            //armazenar dados cabeçalho
+            data[0] = width;
+            data[1] = height;
+            data[2] = max;
 
             //total de pixels
             total = width*height;
@@ -125,10 +131,10 @@ public:
 
     /*
     drawLimits - desenha a linha divisória entre objeto e fundo
-    @param Graph* representativo da figura, int width, int height, String nome do arquivo
+    @param Graph* representativo da figura, int[3] (width, height, max), String nome do arquivo
     @return int 1 sucess || 0 fail
     */
-    static int drawLimits (Graph* grafo, int width, int height, int max, string nome){
+    static int drawLimits (Graph* grafo, int data[3], string nome){
         //declarações
         int control = 0;
         fstream arquivo;
@@ -137,11 +143,11 @@ public:
         arquivo.open(nome, ios::out);
         if(arquivo.is_open()){
             arquivo << "P2" << endl;
-            arquivo << width << " " << height << endl;
-            arquivo << max << endl;
+            arquivo << data[0] << " " << data[1] << endl;
+            arquivo << data[2] << endl;
             control++;
-            for(int i=0; i<height; i++){
-                for(int j=0; j<width; j++){
+            for(int i=0; i<data[1]; i++){
+                for(int j=0; j<data[0]; j++){
                     arquivo << grafo->getVertex(control) << " ";
                     control++;
                 }
@@ -155,8 +161,9 @@ public:
 
 //para testes
 int main(){
-    Graph* test = Converter::buildGraph("small.pgm", 13, 27);
+    int data[3];
+    Graph* test = Converter::buildGraph("small.pgm", 13, 27, data);
    // Converter::buildGraph("basic.pgm")->print();
-    Converter::drawLimits (test, 5, 6, 15, "saida.pgm");
+    Converter::drawLimits (test, data, "saida.pgm");
 
 }
