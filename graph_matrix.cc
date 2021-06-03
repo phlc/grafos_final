@@ -166,8 +166,53 @@ public:
 
 private:
     /*
-    Line Class - Subclasse de fila para Breadth Search First
+    Queue Class - Subclasse de fila para Breadth Search First
     */
-    
+    class Queue{
+        int first; //primeiro da fila
+        int last; //ultima posicao da fila (vazio)
+        int size; //tamanho da fila
+        int* arr; //fila
+
+public:
+        //constructor
+        Queue(int s){
+            first = 0;
+            last = 0;
+            size = s;
+            arr = new int[size]; 
+        }
+
+        //destructor
+        ~Queue(){
+            delete arr;
+        }
+
+        /*
+        enqueue - enfileira um elemento na fila
+        @param int n elemento
+        @return int 0 fail | 1 success
+        */
+        int enqueue(int n){
+            if (first != last - size +1){
+                arr[last]=n;
+                last++;
+                return 1;
+            }
+            return 0;
+        }
+
+        /*
+        dequeue - desenfileira um elemento da fila
+        @return int n elemento | -1 fila vazia
+        */
+       int dequeue(){
+           if(first!=last){
+               last--;
+               return arr[last];
+           }
+           return -1;
+       }
+    };
     
 };
