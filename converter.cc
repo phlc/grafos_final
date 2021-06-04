@@ -41,10 +41,12 @@ private:
     @return int flow
     */
     static int calcFlow (int max, int p1, int p2){
-        int abs = p1 - p2;
-        if(abs < 0)
-            abs *= -1;
-        return ((max+1) - abs);
+        int flow = p1 - p2;
+        if(flow < 0)
+            flow *= -1;
+        flow = max+1 - flow;
+        flow = flow * flow * flow;
+        return flow;
     }
 
 public:    
