@@ -26,7 +26,7 @@ int main(){
     int data[3];
 
     //criar grafo a partir do arquivo
-    Graph* grafo = Converter::buildGraph("basic2.pgm", 1, 250, data);
+    Graph* grafo = Converter::buildGraph("ex4.pgm", 324, 1, data);
 
     //obter grafo de corte (arestas c-f, f)
     Graph* corte = grafo->maxFlow(0, grafo->nVertices()-1);
@@ -50,6 +50,6 @@ int main(){
     }
 
     //criar .pgm resposta
-    Converter::drawLimits(corte, data, "basic2_limits.pgm");
+    Converter::drawLimits(corte, data, "saidaex4.pgm");
 
 }

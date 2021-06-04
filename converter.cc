@@ -10,7 +10,7 @@ Trabalho Final
 
 
 /*
-Converter - Class para leitura do arquivo .pgm e contrução do grafo e vice-versa
+Converter - Class para leitura do arquivo .pgm e construção do grafo e vice-versa
 Cada pixel do arquivo é representado por um vértice, lido da esqueda para direita, de cima para baixo
 Peso do vértice é o valor do pixel
 Haverá uma arestas entre dois pixels se forem vizinhos diretos (diagonal não é vizinho)
@@ -117,10 +117,10 @@ public:
         int source = grafo->getVertex(s);
         int sink = grafo->getVertex(t);
         for(int i=1; i<=total; i++){
-            if(grafo->getVertex(i)==source){
+            if( source - 2 <= grafo->getVertex(i) && grafo->getVertex(i)  <= source + 2){
                 grafo->setEdge(0, i, max+1);
             }
-            else if(grafo->getVertex(i)==sink){
+            else {
                 grafo->setEdge(i, total+1, max+1);
             }
         }
