@@ -42,12 +42,11 @@ Tárcila Fernanda Resende da Silva - 680250}
 
  Para a construção do grafo, são criados vértices para cada pixel da imagem e dois vértices a mais para serem os respectivos source e sink utilizados no algoritmo de fluxo em redes. A posição dos pixels de referência para o source e sink são recebidos como parâmetro. Cada vértice de pixel armazena o valor númerico da cor.\\
  
- Os vértices de pixel são ligados por uma aresta valorada aos seus respectivos vizinhos. O valor armazenado em cada aresta é o seu fluxo, quanto maior o valor do fluxo, mais semelhante é a cor do pixel vizinhos. Existe um outro tipo de vértice que conecta o source e o sink aos pixels que têm  tonalidades parecidas.
+ Os vértices de pixel são ligados por uma aresta valorada aos seus respectivos vizinhos. O valor armazenado em cada aresta é o seu fluxo, quanto maior o valor do fluxo, mais semelhante é a cor dos pixels vizinhos. Existe um outro tipo de vértice que conecta o source e o sink aos pixels que têm  tonalidades parecidas.
  
  \section{Segmentação da Imagem}
 \quad A função \textbf{maxFlow} retorna o fluxo máximo do grafo da imagem utilizando o algoritmo de Ford-Fulkerson. A partir do grafo residual de fluxo máximo, é possível encontrar o corte, que representa a separação do fundo com o primeiro plano da imagem.\\
 
-A ideia principal do algoritmo de segmentação é aumentar o fluxo de entrada entre cores que se parecem, desta forma os pixels que são parecidos irão fazer parte da separação do seu respectivo plano. A saída contem uma imagem com pixels pretos para representar o primeiro plano da imagem e brancos para pixels do fundo.
+A idéia principal do algoritmo de segmentação é aumentar o fluxo de entrada entre cores que se parecem, desta forma os pixels que são parecidos irão fazer parte da separação do seu respectivo plano. A saída contém uma imagem com pixels pretos para representar o primeiro plano da imagem e brancos para pixels do fundo.
 
 \end{document}
-
